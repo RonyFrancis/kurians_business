@@ -4,14 +4,14 @@ module V1
   # UsersController
   class UsersController < ApplicationController
     skip_before_action :verify_authenticity_token
-    before_action :get_params
+    before_action :fetch_params
 
     def sign_in
       user = valid_user(@params['email'], @params['password'])
       user.update(auth_token: SecureRandom.uuid)
       render json: succes_response(
-        { auth_token: user.auth_token,
-          user_type: user_type(user) }
+        auth_token: user.auth_token,
+        user_type: user_type(user)
       )
     rescue APIException => e
       render json: error_response(e.code, e.message)
@@ -21,7 +21,7 @@ module V1
 
     private
 
-    def get_params
+    def fetch_params
       @params = JSON.parse(request.raw_post)
     end
 

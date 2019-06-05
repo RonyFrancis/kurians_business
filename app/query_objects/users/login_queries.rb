@@ -1,16 +1,5 @@
 module Users
-  # class APIException < StandardError
-  #   attr_reader :message
-  #   attr_reader :code
-  # end
-  #
-  # class InvalidLoginError < APIException
-  #   def initialize
-  #     @message = 'Invalid Login Credentials'
-  #     @code = '001'
-  #   end
-  # end
-
+  # LoginQueries
   class LoginQueries
     attr_reader :email, :password
     def initialize(email:, password:)
@@ -20,7 +9,7 @@ module Users
 
     def call
       raise InvalidLoginError unless valid_params?
-      raise UserNotRegisterError if valid_user.blank?
+      raise IncorrectCredentialsError if valid_user.blank?
 
       valid_user
     end
