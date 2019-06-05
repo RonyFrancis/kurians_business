@@ -17,7 +17,7 @@ RSpec.describe Users::LoginQueries do
     end
   end
 
-  context 'with user not registered' do
+  context 'with incorrect password' do
     before do
       valid_user
     end

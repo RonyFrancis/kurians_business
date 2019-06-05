@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  # EXCEPTIONS = [Users::InvalidLoginError, Users::UserNotFoundError]
-  #
-  # rescue_from APIException do |e|
-  #   response = { code: e.code,
-  #                message: e.message,
-  #                version: 1 }
-  #   render json: response
-  # end
-  #
+  def current_user
+    @current_user ||= Users::AuthenticationQuery.new(
+      email: @params['email'], auth_token: @params['auth_token']
+    ).call
+  end
+
+  private
+  
+  def fetch_params
+    @params = JSON.parse(request.raw_post)
+  end
 end

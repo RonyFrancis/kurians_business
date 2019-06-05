@@ -17,13 +17,16 @@ module V1
       render json: error_response(e.code, e.message)
     end
 
-    def sign_out; end
+    def sign_out
+      current_user.update(auth_token: '')
+      render json: succes_response(
+        { status_message: 'user signed out' }
+      )
+      rescue APIException => e
+        render json: error_response(e.code, e.message)
+    end
 
     private
-
-    def fetch_params
-      @params = JSON.parse(request.raw_post)
-    end
 
     def valid_user(email, password)
       Users::LoginQueries.new(
@@ -38,9 +41,7 @@ module V1
     end
 
     def succes_response(data)
-      ResponseFormatter.new(
-        data: data
-      ).call
+      ResponseFormatter.new(data: data).call
     end
 
     def user_type(user)
