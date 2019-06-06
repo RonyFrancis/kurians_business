@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   namespace :v1 do
     post 'users/sign_in' => 'users#sign_in'
     post 'users/sign_out' => 'users#sign_out'
+    resources :registrations, only: [:create] 
   end
 end

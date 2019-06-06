@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= Users::AuthenticationQuery.new(
-      email: @params['email'], auth_token: @params['auth_token']
+      email: @params[:user_name], auth_token: @params[:auth_token]
     ).call
   end
 

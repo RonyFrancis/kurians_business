@@ -7,7 +7,7 @@ module V1
     before_action :fetch_params
 
     def sign_in
-      user = valid_user(@params['email'], @params['password'])
+      user = valid_user(@params[:email], @params[:password])
       user.update(auth_token: SecureRandom.uuid)
       render json: succes_response(
         auth_token: user.auth_token,
