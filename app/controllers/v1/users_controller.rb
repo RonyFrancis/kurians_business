@@ -34,16 +34,6 @@ module V1
       ).call
     end
 
-    def error_response(code, message)
-      ResponseFormatter.new(
-        code: code, message: message
-      ).call
-    end
-
-    def succes_response(data)
-      ResponseFormatter.new(data: data).call
-    end
-
     def user_type(user)
       user.is_admin? ? 'admin' : 'user'
     end
