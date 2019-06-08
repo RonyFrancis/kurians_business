@@ -3,13 +3,13 @@ module V1
     skip_before_action :verify_authenticity_token
     before_action :fetch_params
     def recover_password
-      # create_temp_password(@params[:email])
+      create_temp_password(@params[:email])
       send_recover_email(@params[:email])
       render json: succes_response(
         status_message: 'temp password created'
       )
-    # rescue APIException => e
-    #   render json: error_response(e.code, e.message)
+    rescue APIException => e
+      render json: error_response(e.code, e.message)
     end
 
     def change_password
