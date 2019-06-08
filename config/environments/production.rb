@@ -97,7 +97,7 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'example.com',
-    user_name:            ENV['SENDGRID_USERNAME'],
-    password:             ENV['SENDGRID_PASSWORD'],
+    user_name:            'ronydfrnd@gmail.com',
+    password:             'ynorsicnarf4591',
     authentication:       'plain'}
 end
