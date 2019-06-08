@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   namespace :v1 do
     post 'users/sign_in' => 'users#sign_in'
     post 'users/sign_out' => 'users#sign_out'
-    resources :registrations, only: [:create] 
+    post 'password/recover_password' => 'password#recover_password'
+    post 'password/change_password' => 'password#change_password'
+    resources :registrations, only: [:create]
+    resources :bills, only: [:create]
   end
 end

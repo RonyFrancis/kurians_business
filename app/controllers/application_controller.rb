@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   def current_user
+    puts @params.inspect
     @current_user ||= Users::AuthenticationQuery.new(
       email: @params[:user_name], auth_token: @params[:auth_token]
     ).call
