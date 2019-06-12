@@ -15,7 +15,7 @@ development:
   # pool: 5
   #timeout: 5000
   adapter: postgresql
-  database: bb_development
+  database: bb_production
   username: postgres
   password: postgres
   host: localhost
