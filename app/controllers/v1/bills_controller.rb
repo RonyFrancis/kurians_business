@@ -5,7 +5,7 @@ module V1
     before_action :fetch_params
 
     def create
-      add_bill(current_user, @params)
+      add_bill(current_user, params)
       render json: succes_response(
         user_name: @params[:user_name]
       )

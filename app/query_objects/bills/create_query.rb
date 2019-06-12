@@ -8,7 +8,7 @@ module Bills
 
     def call
       raise InvalidParamsError unless valid_params?
-      raise InvalidBillParamsError unless bill_params[:image].present?
+      raise InvalidBillParamsError unless bill_params[:bill_image].present?
       raise BillCreationFailureError unless create_bill
 
       true
