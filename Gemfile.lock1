@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/stympy/faker.git
-  revision: bccc8e4ad447370540048886dac9d13f56d28546
+  revision: 14617c4ef7b89998e98e833ad5d11760e03d9bad
   branch: master
   specs:
     faker (1.9.3)
@@ -9,7 +9,7 @@ GIT
       thor (~> 0.20.0)
       tty-pager (~> 0.12.0)
       tty-screen (~> 0.6.5)
-      tty-tree (~> 0.3.0)
+      tty-tree (~> 0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -149,7 +149,6 @@ GEM
     pastel (0.7.2)
       equatable (~> 0.5.0)
       tty-color (~> 0.4.0)
-    pg (0.21.0)
     public_suffix (3.1.0)
     puma (3.12.1)
     rack (2.0.7)
@@ -232,7 +231,7 @@ GEM
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
-    shoulda-matchers (4.1.0)
+    shoulda-matchers (4.0.1)
       activesupport (>= 4.2.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -246,6 +245,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.1)
     strings (0.1.5)
       strings-ansi (~> 0.1)
       unicode-display_width (~> 1.5)
@@ -263,7 +263,7 @@ GEM
       tty-screen (~> 0.6)
       tty-which (~> 0.4)
     tty-screen (0.6.5)
-    tty-tree (0.3.0)
+    tty-tree (0.2.0)
     tty-which (0.4.1)
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
@@ -304,7 +304,6 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   mail
-  pg (~> 0.21.0)
   puma (~> 3.11)
   rails (~> 5.2.3)
   rake (~> 12.3.2)
@@ -316,6 +315,7 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
+  sqlite3
   therubyracer
   turbolinks (~> 5)
   tzinfo-data
