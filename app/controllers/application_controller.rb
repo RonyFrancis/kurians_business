@@ -10,13 +10,16 @@ class ApplicationController < ActionController::Base
 
   private
 
+
   def fetch_params
-    @params = JSON.parse(request.raw_post, symbolize_names: true)
+	  Rails.logger.info request.raw_post.inspect
+      	  puts request.raw_post.inspect
+	  @params = JSON.parse(URI.unescape(request.raw_post), symbolize_names: true)
   end
 
   def error_response(code, message)
     ResponseFormatter.new(
-      code: code, message: message
+	    code: code.to_i, message: message
     ).call
   end
 

@@ -3,14 +3,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.0'
+ruby '2.5.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 gem 'mail'
 # Use sqlite3 as the database for Active Record
-# gem 'sqlite3'
-gem 'pg', '~> 0.21.0'
+#gem 'sqlite3'
+ gem 'pg', '~> 0.21.0'
 gem 'carrierwave', '~> 1.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
@@ -52,7 +52,10 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
 end
-
+# gem 'tzinfo-data'
+gem 'therubyracer', platforms: :ruby
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -69,7 +72,8 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end
+gem 'rake', '~> 12.3.2'
 # For code review
 gem 'rubocop', require: false
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+#gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
