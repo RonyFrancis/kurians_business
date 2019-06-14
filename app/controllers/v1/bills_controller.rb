@@ -2,7 +2,20 @@ module V1
   # BillsController
   class BillsController < ApplicationController
     skip_before_action :verify_authenticity_token
-    # before_action :fetch_params
+    # before_action :fetch_params, only: [:index]
+
+    def welcome
+      render json: {a:'msg'}
+    end
+
+    def index
+      bills = fetch_bills(current_user, params)
+      render json: succes_response(
+        bills: bills
+      )
+      rescue APIException => e
+        render json: error_response(e.code, e.message)
+    end
 
     def create
       add_bill(current_user, params)
@@ -21,6 +34,12 @@ module V1
       Bills::CreateQuery.new(
         current_user: current_user,
         bill_params: params
+      ).call
+    end
+
+    def fetch_bills(user, pagination_params)
+      Bills::FetchQuery.new(
+        user: user, pagination_params: pagination_params
       ).call
     end
 

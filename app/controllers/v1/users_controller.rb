@@ -11,7 +11,12 @@ module V1
       user.update(auth_token: SecureRandom.uuid)
       render json: succes_response(
         auth_token: user.auth_token,
-        user_type: user_type(user)
+        user_type: user_type(user),
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        forward_email: user.forward_email,
+        mobile_number: user.mobile_number 
       )
     rescue APIException => e
       render json: error_response(e.code, e.message)

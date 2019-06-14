@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     post 'users/sign_out' => 'users#sign_out'
     post 'password/recover_password' => 'password#recover_password'
     post 'password/change_password' => 'password#change_password'
+    post  '/welcome' => 'bills#welcome'
     resources :registrations, only: [:create]
-    resources :bills, only: [:create]
+    resources :bills, only: [:index, :create]
   end
 end
