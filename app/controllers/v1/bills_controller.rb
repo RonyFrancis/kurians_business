@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   # BillsController
   class BillsController < ApplicationController
@@ -5,16 +7,19 @@ module V1
     # before_action :fetch_params, only: [:index]
 
     def welcome
-      render json: {a:'msg'}
+      render json: { a: 'msg' }
     end
 
     def index
-      bills = fetch_bills(current_user, params)
-      render json: succes_response(
-        bills: bills
+      bills_details = fetch_bills(
+        current_user, params[:page], request.base_url
       )
-      rescue APIException => e
-        render json: error_response(e.code, e.message)
+      render json: succes_response(
+        bills: bills_details[0],
+        pagination_details: bills_details[1]
+      )
+    rescue APIException => e
+      render json: error_response(e.code, e.message)
     end
 
     def create
@@ -37,9 +42,10 @@ module V1
       ).call
     end
 
-    def fetch_bills(user, pagination_params)
+    def fetch_bills(user, page, url)
       Bills::FetchQuery.new(
-        user: user, pagination_params: pagination_params
+        user: user, page: page,
+        url: url
       ).call
     end
 
@@ -52,13 +58,13 @@ module V1
 
     def send_mails(user)
       BillMailer.with(
-	      email: user.email
+        email: user.email
       ).send_bill_mail.deliver_later
     end
 
     def send_mail_to_admin(user)
-	    BillMailer.with(
-              email: user.email
+      BillMailer.with(
+        email: user.email
       ).send_bill_to_admin_mail.deliver_later
     end
   end

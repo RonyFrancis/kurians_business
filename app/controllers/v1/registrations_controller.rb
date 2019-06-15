@@ -8,6 +8,7 @@ module V1
 
     def create
       register_user(current_user, @params)
+      send_registration_mail(@params[:email])
       render json: succes_response(
         user_name: @params[:email]
       )
@@ -22,6 +23,12 @@ module V1
         current_user: current_user,
         user_params: params
       ).call
+    end
+
+    def send_registration_mail(email)
+      UserMailer.with(
+        email: email
+      ).send_registration.deliver_later
     end
   end
 end

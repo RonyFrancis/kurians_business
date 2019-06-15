@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web:
+    build: .
+    # restart: always
+    ports:
+      - 3000:3000
+    # volumes:
+      # - log:/home/rony/kurians_business/log
+      # - uploads:/home/rony/kurians_business/public/
+      # - postgres-data:/var/lib/postgresql
+# volumes:
+  #log:
+   # external: true
+  #uploads:
+   # external: true
+  #postgres-data:
+   # external: true

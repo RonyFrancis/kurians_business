@@ -1,25 +1,45 @@
+# frozen_string_literal: true
+
 module Bills
+  # FetchQuery
   class FetchQuery
-    def initialize(user:, pagination_params:)
+    attr_reader :user, :page, :url
+    def initialize(user:, page:, url:)
       @user = user
-      @pagination_params = pagination_params
+      @page = page
+      @url = url
     end
 
     def call
       raise InvalidParamsError unless valid_params?
-      raise InvalidPaginationError unless valid_pagination_params?
-      
-      user.bills
+
+      bills = Bill.where(user_id: user.id).paginate(
+        page: page
+      ).order('created_at DESC')
+      [fetch_bill_details(bills), pagination_details(bills)]
     end
 
     private
-   
-    def vaild_params?
-      (user && pagination_params).present?
+
+    def valid_params?
+      (user && page && url).present?
     end
 
-    def valid_pagination_params?
-      (pagination_params[:page] && pagination_params[:status]).present?
+    def fetch_bill_details(bills)
+      bills.map do |bill|
+        {
+          id: bill.id,
+          name: bill.avatar.file.filename,
+          url: url + bill.avatar.url
+        }
+      end
+    end
+
+    def pagination_details(bills)
+      {
+        current_page: bills.current_page,
+        total_pages: bills.total_pages
+      }
     end
   end
 end
