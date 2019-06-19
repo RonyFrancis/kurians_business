@@ -5,6 +5,7 @@ module V1
   class BillsController < ApplicationController
     skip_before_action :verify_authenticity_token
     # before_action :fetch_params, only: [:index]
+    URL = "https://139.59.86.198/"
 
     def welcome
       render json: { a: 'msg' }
@@ -12,7 +13,7 @@ module V1
 
     def index
       bills_details = fetch_bills(
-        current_user, params[:page], request.base_url
+        current_user, params[:page], URL
       )
       render json: succes_response(
         bills: bills_details[0],
