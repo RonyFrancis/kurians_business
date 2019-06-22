@@ -3,7 +3,7 @@ class BillMailer < ApplicationMailer
     @user = User.find_by(email: params[:email])
     @bill = @user.bills.last
     attachments['bill_image.jpg'] = File.read(@bill.avatar.current_path)
-    mail(to: @user.email, subject: 'Your Bill')
+    mail(to: @user.forward_email, subject: 'Your Bill')
   end
 
   def send_bill_to_admin_mail
@@ -11,6 +11,6 @@ class BillMailer < ApplicationMailer
     @bill = @user.bills.last
     @admin = User.find_by(is_admin: true)
     attachments['bill_image.jpg'] = File.read(@bill.avatar.current_path)
-    mail(to: @admin.email, subject: "#{@user.email}'s Bill")
+    mail(to: @admin.forward_email, subject: "#{@user.email}'s Bill")
   end
 end

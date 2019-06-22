@@ -97,7 +97,7 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'bbclients.com.au',
-    user_name:            "web@businessbooks.com.au"
-    password:             "Abin2019"
+    user_name:            "web@businessbooks.com.au",
+    password:             "Abin2019",
     authentication:       'plain'}
 end
