@@ -39,4 +39,4 @@ production:
   database: bb_production
   username: postgres
   password: postgres
-  host: localhost
+  host: db
