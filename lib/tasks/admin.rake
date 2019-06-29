@@ -6,9 +6,9 @@ namespace :admin do
   # Define the task
   task create: :environment do
     user = User.create(
-      first_name: 'rony', last_name: 'francis',
-      email: 'ronydfrnd@gmail.com', forward_email: 'rony@remitap.com',
-      mobile_number: '9061415632', password: Base64.encode64('123456'),
+      first_name: 'Sahil', last_name: 'Kansal',
+      email: 'info@businessbooks.com.au', forward_email: 'info@businessbooks.com.au',
+      mobile_number: '0450300655', password: Base64.encode64('Abin2019'),
       is_admin: true
     )
     puts "User created " + user.inspect
