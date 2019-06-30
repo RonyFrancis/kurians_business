@@ -26,7 +26,7 @@ module V1
     def create
       add_bill(current_user, params)
       send_mails(current_user)
-      send_mail_to_admin(current_user)
+      # send_mail_to_admin(current_user)
       render json: succes_response(
         status: 'success'
       )
