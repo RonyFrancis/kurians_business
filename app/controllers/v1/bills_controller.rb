@@ -8,7 +8,7 @@ module V1
     URL = "https://bbclients.com.au"
 
     def welcome
-      render json: { a: 'msg' }
+      render json: { status: 'up' }
     end
 
     def index

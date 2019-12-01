@@ -1,15 +1,17 @@
 module Users
   # LoginQueries
   class LoginQueries
-    attr_reader :email, :password
-    def initialize(email:, password:)
+    attr_reader :email, :password, :platform
+    def initialize(email:, password: , platform:)
       @email = email
       @password = password
+      @platform = platform
     end
 
     def call
       raise InvalidLoginError unless valid_params?
       raise IncorrectCredentialsError if valid_user.blank?
+      raise NotAdminUserError unless admin_check?
 
       valid_user
     end
@@ -18,6 +20,16 @@ module Users
 
     def valid_params?
       (email && password).present?
+    end
+
+    def web_platform?
+      platform == "web"
+    end
+
+    def admin_check?
+      return valid_user.is_admin if  web_platform?
+
+      true
     end
 
     def valid_user

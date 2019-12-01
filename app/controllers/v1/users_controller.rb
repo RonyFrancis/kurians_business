@@ -4,10 +4,10 @@ module V1
   # UsersController
   class UsersController < ApplicationController
     skip_before_action :verify_authenticity_token
-    before_action :fetch_params
+    before_action :fetch_params,  only: [:sign_in, :sign_out]
 
     def sign_in
-      user = valid_user(@params[:email], @params[:password])
+      user = valid_user(@params[:email], @params[:password], @params[:platform])
       user.update(auth_token: SecureRandom.uuid)
       render json: succes_response(
         auth_token: user.auth_token,
@@ -16,7 +16,7 @@ module V1
         first_name: user.first_name,
         last_name: user.last_name,
         forward_email: user.forward_email,
-        mobile_number: user.mobile_number 
+        mobile_number: user.mobile_number
       )
     rescue APIException => e
       render json: error_response(e.code, e.message)
@@ -33,9 +33,9 @@ module V1
 
     private
 
-    def valid_user(email, password)
+    def valid_user(email, password, platform)
       Users::LoginQueries.new(
-        email: email, password: password
+        email: email, password: password, platform: platform
       ).call
     end
 
