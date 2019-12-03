@@ -25,8 +25,21 @@ module V1
     def destroy
       current_user
       user = Users::FetchUserByIdQuery.new(id: params[:id]).call
+      user.destroy
       render json: succes_response(
-        "status": "user is deleted" 
+        "status": "user is deleted"
+      )
+    rescue APIException => e
+      render json: error_response(e.code, e.message)
+    end
+
+    def update
+      current_user
+      user = Users::FetchUserByIdQuery.new(id: params[:id]).call
+      update_status = user.update_attributes(user_params)
+      raise FailedToUpdateUser unless update_status == true
+      render json: succes_response(
+        "update_status": "user has been updated"
       )
     rescue APIException => e
       render json: error_response(e.code, e.message)
@@ -44,6 +57,10 @@ module V1
       Users::FetchQuery.new(
         page: page
       ).call
+    end
+
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :email, :forward_email, :mobile_number)
     end
   end
 end
