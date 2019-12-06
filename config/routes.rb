@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post 'password/recover_password' => 'password#recover_password'
     post 'password/change_password' => 'password#change_password'
     get  '/status' => 'bills#welcome'
+    post 'user_profile/update_status' => 'user_profile#update_status'
     resources :user_profile
     resources :registrations, only: [:create]
     resources :bills, only: [:index, :create]

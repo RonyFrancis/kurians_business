@@ -3,7 +3,7 @@ module V1
     skip_before_action :verify_authenticity_token
     def index
       current_user
-      users = fetch_users(params[:page])
+      users = fetch_users(params[:page], params[:search_term])
       render json: succes_response(
         users: users[0],
         pagination_details: users[1]
@@ -45,6 +45,16 @@ module V1
       render json: error_response(e.code, e.message)
     end
 
+    def update_status
+      users = Users::FetchUsersByIDS.new(ids: params[:ids]).call
+      users.update(status: params[:status])
+      render json: succes_response(
+        "status": "users have been updated"
+      )
+    rescue APIException => e
+      render json: error_response(e.code, e.message)
+    end
+
     private
 
     def current_user
@@ -53,9 +63,9 @@ module V1
       ).call
     end
 
-    def fetch_users(page)
+    def fetch_users(page, search_term)
       Users::FetchQuery.new(
-        page: page
+        page: page, search_term: search_term
       ).call
     end
 
