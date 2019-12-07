@@ -71,9 +71,9 @@ module V1
 
     def user_params
       params.require(:user).permit(
-        :first_name, :last_name, :email, :forward_email, :mobile_number. :status,
-        :user_type, :address, :tfn, :dob
-      )
+      :first_name, :last_name, :email, :forward_email, :mobile_number,
+       :status,:user_type, :address, :tfn, :dob
+       )
     end
   end
 end
