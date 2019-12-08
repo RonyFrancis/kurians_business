@@ -1,6 +1,7 @@
 module V1
   class UserProfileController < ApplicationController
     skip_before_action :verify_authenticity_token
+    before_action :fetch_params, only: [:create]
     def index
       current_user
       users = fetch_users(params[:page], params[:search_term])
@@ -25,6 +26,7 @@ module V1
     def destroy
       current_user
       user = Users::FetchUserByIdQuery.new(id: params[:id]).call
+      raise UnableToDeleteUser if current_user.id == user.id
       user.destroy
       render json: succes_response(
         "status": "user is deleted"
@@ -55,6 +57,16 @@ module V1
       render json: error_response(e.code, e.message)
     end
 
+    def create
+      register_user(current_user, @params)
+      # send_registration_mail(@params[:user_params][:email])
+      render json: succes_response(
+        user_name: @params[:user_params][:email]
+      )
+    rescue APIException => e
+      render json: error_response(e.code, e.message)
+    end
+
     private
 
     def current_user
@@ -75,5 +87,19 @@ module V1
        :status,:user_type, :address, :tfn, :dob
        )
     end
+
+    def register_user(current_user, params)
+      Company::RegistrationQuery.new(
+        current_user: current_user,
+        user_params: params[:user_params]
+      ).call
+    end
+
+    def send_registration_mail(email)
+      UserMailer.with(
+        email: email
+      ).send_registration.deliver_later
+    end
+
   end
 end
