@@ -84,7 +84,7 @@ module V1
     def user_params
       params.require(:user).permit(
       :first_name, :last_name, :email, :forward_email, :mobile_number,
-       :status,:user_type, :address, :tfn, :dob
+       :status,:user_type, :address, :tfn, :dob, :integration_type
        )
     end
 
@@ -100,6 +100,5 @@ module V1
         email: email
       ).send_registration.deliver_later
     end
-
   end
 end

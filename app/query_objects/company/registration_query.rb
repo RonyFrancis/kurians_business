@@ -35,13 +35,11 @@ module Company
         (user_params[:business_address] && user_params[:business_phone_no]).present? && \
         (user_params[:business_email] && user_params[:website]).present? && \
         (user_params[:industry] && user_params[:nominated_contact_person]).present? && \
-        (user_params[:nominated_contact_position] && user_params[:account_management_email]).present?
+        (user_params[:nominated_contact_position] && user_params[:account_management_email]).present? && \
+        (user_params[:integration_type]).present?
     end
 
     def register
-      puts '*' * 50
-      puts user_params[:dob].inspect
-      puts '*' * 50
       user = User.new(
                email: user_params[:email], forward_email: user_params[:forward_email],
                mobile_number: user_params[:mobile_number], first_name: user_params[:first_name],
@@ -55,7 +53,8 @@ module Company
                website: user_params[:website], industry: user_params[:industry],
                nominated_contact_person: user_params[:nominated_contact_person],
                nominated_contact_position: user_params[:nominated_contact_position],
-               account_management_email: user_params[:account_management_email]
+               account_management_email: user_params[:account_management_email],
+               integration_type: user_params[:integration_type]
               )
       user.save
     end
