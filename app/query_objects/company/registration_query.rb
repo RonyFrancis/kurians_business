@@ -43,7 +43,7 @@ module Company
       user = User.new(
                email: user_params[:email], forward_email: user_params[:forward_email],
                mobile_number: user_params[:mobile_number], first_name: user_params[:first_name],
-               last_name: user_params[:last_name], password: Base64.encode64(user_params[:password]),
+               last_name: user_params[:last_name], password: user_params[:password],
                status: user_params[:status], user_type: user_params[:user_type],
                address: user_params[:address], tfn: user_params[:tfn], dob: user_params[:dob],
                client_type: user_params[:client_type], company_name: user_params[:company_name],

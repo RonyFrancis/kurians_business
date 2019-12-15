@@ -83,7 +83,7 @@ module V1
 
     def user_params
       params.require(:user).permit(
-      :first_name, :last_name, :email, :forward_email, :mobile_number,
+      :first_name, :last_name, :email, :forward_email, :mobile_number, :password,
        :status,:user_type, :address, :tfn, :dob,:client_type, :integration_type,
        :company_name, :trading_name,:abn_can,:company_tfn, :business_address,
        :business_phone_no, :business_email, :website, :industry,:nominated_contact_person,
