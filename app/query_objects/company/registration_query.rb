@@ -28,7 +28,6 @@ module Company
         (user_params[:first_name] && user_params[:last_name]).present? && \
         (user_params[:mobile_number] && user_params[:password]).present? && \
         (user_params[:status] && user_params[:user_type]).present? && \
-        (user_params[:address] && user_params[:tfn]).present? && \
         (user_params[:dob] && user_params[:client_type]).present? && \
         (user_params[:company_name] && user_params[:trading_name]).present? && \
         (user_params[:abn_can] && user_params[:company_tfn]).present? && \
