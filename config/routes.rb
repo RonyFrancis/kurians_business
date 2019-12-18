@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     post 'password/change_password' => 'password#change_password'
     get  '/status' => 'bills#welcome'
     post 'user_profile/update_status' => 'user_profile#update_status'
+    get 'quick_book/prepare_auth_code_url' => 'quickbook#prepare_auth_code_url'
+    get 'redirect_url' => 'quickbook#redirect_url'
+    get 'auth_token' => 'quickbook#get_auth_token'
     resources :user_profile
     resources :registrations, only: [:create]
     resources :bills, only: [:index, :create]
