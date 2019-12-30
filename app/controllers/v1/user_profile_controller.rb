@@ -59,7 +59,7 @@ module V1
 
     def create
       register_user(current_user, @params)
-      # send_registration_mail(@params[:user_params][:email])
+      send_registration_mail(@params[:user_params][:email])
       render json: succes_response(
         user_name: @params[:user_params][:email]
       )
