@@ -11,7 +11,7 @@ module Company
     def call
       raise InvalidParamsError unless valid_params?
       raise NotAdminUserError unless current_user.is_admin
-      raise InvalidUserParamsError unless valid_users_params?
+      # raise InvalidUserParamsError unless valid_users_params?
       raise DuplicateUserError unless register
 
       true

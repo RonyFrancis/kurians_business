@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     ).call
   end
 
+  def frontend_index_html
+    render file: 'public/index.html', layout: false
+  end
+
   private
 
 
