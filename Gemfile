@@ -76,7 +76,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end
-gem 'rake', '~> 12.3.2'
+gem 'rake', '~> 12.3.3'
 # For code review
 gem 'rubocop', require: false
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
